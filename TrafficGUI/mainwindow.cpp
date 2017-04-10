@@ -8,9 +8,11 @@ struct{
     int green_time;
     int wait_time;
     int masked;
+    int prev_count_of_cars;
 } para_road[4];
 
-int global_signal_time= 60;
+
+int global_signal_time= 120;
 
 static void Init_params();
 //struct road_parameter para_road[4];
@@ -20,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     Init_params();
+    DTMS= true;
     QGridLayout *layout = new QGridLayout(this);
     myPlayerNorth = new Player();
     myPlayerSouth = new Player();
@@ -67,46 +70,48 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(myPlayerWest, SIGNAL(processedImage(QImage)),
                               this, SLOT(updatePlayerUI3(QImage)));
     QObject::connect(time_North, SIGNAL(greencal_call()),
-                              this, SLOT(greenTimeCalculator()));
+                              this, SLOT(greenTimeCalculator_point()));
     QObject::connect(time_South, SIGNAL(greencal_call()),
-                              this, SLOT(greenTimeCalculator()));
+                              this, SLOT(greenTimeCalculator_point()));
     QObject::connect(time_East, SIGNAL(greencal_call()),
-                              this, SLOT(greenTimeCalculator()));
+                              this, SLOT(greenTimeCalculator_point()));
     QObject::connect(time_West, SIGNAL(greencal_call()),
-                              this, SLOT(greenTimeCalculator()));
+                              this, SLOT(greenTimeCalculator_point()));
 
     ui->setupUi(this);
+    QPixmap *pix= new QPixmap("../TrafficGUI/Analog-Devices.jpg");
+    QPixmap *pix1= new QPixmap("../TrafficGUI/RVCE_New_Logo.jpg");
+    ui->logo->setPixmap(pix->scaled(ui->logo->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
+    ui->logo1->setPixmap(pix1->scaled(ui->logo1->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
+    if (!myPlayerNorth->loadVideo("../TrafficGUI/CarsDrivingUnderBridge.mp4"))
+    {
+        QMessageBox msgBox;
+        msgBox.setText("The selected video could not be opened!");
+        msgBox.exec();
+    }
+    if (!myPlayerSouth->loadVideo("../TrafficGUI/CarsDrivingUnderBridge1.mp4"))
+    {
+        QMessageBox msgBox;
+        msgBox.setText("The selected video could not be opened!");
+        msgBox.exec();
+    }
+    if (!myPlayerEast->loadVideo("../TrafficGUI/CarsDrivingUnderBridge2.mp4"))
+    {
+        QMessageBox msgBox;
+        msgBox.setText("The selected video could not be opened!");
+        msgBox.exec();
+    }
+    if (!myPlayerWest->loadVideo("../TrafficGUI/CarsDrivingUnderBridge3.mp4"))
+    {
+        QMessageBox msgBox;
+        msgBox.setText("The selected video could not be opened!");
+        msgBox.exec();
+    }
 
-
-    if (!myPlayerNorth->loadVideo("CarsDrivingUnderBridge.mp4"))
-    {
-        QMessageBox msgBox;
-        msgBox.setText("The selected video could not be opened!");
-        msgBox.exec();
-    }
-    if (!myPlayerSouth->loadVideo("CarsDrivingUnderBridge1.mp4"))
-    {
-        QMessageBox msgBox;
-        msgBox.setText("The selected video could not be opened!");
-        msgBox.exec();
-    }
-    if (!myPlayerEast->loadVideo("CarsDrivingUnderBridge2.mp4"))
-    {
-        QMessageBox msgBox;
-        msgBox.setText("The selected video could not be opened!");
-        msgBox.exec();
-    }
-    if (!myPlayerWest->loadVideo("CarsDrivingUnderBridge3.mp4"))
-    {
-        QMessageBox msgBox;
-        msgBox.setText("The selected video could not be opened!");
-        msgBox.exec();
-    }
-
-    myPlayerNorth->set_position(0.35,0.15,0.15,0.9999,0,0.2999);
+    myPlayerNorth->set_position(0.35,0.15,0.20,0.85,0,0.2999);
     myPlayerSouth->set_position(0.40,0.30,0.1,0.58,0.5701,0.80);
-    myPlayerEast->set_position(0.85,0.85,0.1,0.52,0.5201,0.97);
-    myPlayerWest->set_position(0.35,0.30,0.25,0.9999,0,0.2899);
+    myPlayerEast->set_position(0.80,0.85,0.16,0.45,0.5201,0.97);
+    myPlayerWest->set_position(0.35,0.30,0.25,0.75,0,0.2899);
 //    time_South->timer->start(1000);
 //    time_East->timer->start(1000);
 //    time_West->timer->start(1000);
@@ -125,6 +130,18 @@ MainWindow::MainWindow(QWidget *parent) :
     myPlayerWest->Play();
 }
 
+void MainWindow::greenTimeCalculator_point()
+{
+    if(this->DTMS)
+    {
+        greenTimeCalculator();
+    }
+    else
+    {
+        greenTimeNormal();
+    }
+}
+
 static void Init_params()
 {
     para_road[0].count_of_cars=5;
@@ -132,12 +149,14 @@ static void Init_params()
     para_road[0].green_time=0;
     para_road[0].wait_time=0;
     para_road[0].masked=1;
+    para_road[0].prev_count_of_cars=0;
     for(int i=1;i<4;i++){
             para_road[i].count_of_cars=5;
             para_road[i].green_lit=0;
             para_road[i].green_time=0;
             para_road[i].wait_time=0;
             para_road[i].masked=0;
+            para_road[i].prev_count_of_cars=0;
         }
 }
 
@@ -184,8 +203,8 @@ void MainWindow::greenTimeCalculator()
     int sum_of_elems;
     int already_done[4]= {0,0,0,0};
     para_road[0].count_of_cars=myPlayerNorth->carCount1;
-    para_road[1].count_of_cars=myPlayerSouth->carCount1;
-    para_road[2].count_of_cars=myPlayerEast->carCount1;
+    para_road[1].count_of_cars=myPlayerEast->carCount1;
+    para_road[2].count_of_cars=myPlayerSouth->carCount1;
     para_road[3].count_of_cars=myPlayerWest->carCount1;
     for(i=0;i<4;i++)
     {
@@ -196,15 +215,27 @@ void MainWindow::greenTimeCalculator()
     {
         case 0: {
         widget_North->ChangetoRed();
+        if((para_road[0].count_of_cars-=para_road[0].prev_count_of_cars)<0)
+            para_road[0].count_of_cars=0;
+        myPlayerNorth->carCount1= para_road[0].count_of_cars;
     }break;
     case 2: {
     widget_South->ChangetoRed();
+    if((para_road[2].count_of_cars-=para_road[2].prev_count_of_cars)<0)
+        para_road[2].count_of_cars=0;
+    myPlayerSouth->carCount1= para_road[2].count_of_cars;
 }break;
     case 1: {
     widget_East->ChangetoRed();
+    if((para_road[1].count_of_cars-=para_road[1].prev_count_of_cars)<0)
+        para_road[1].count_of_cars=0;
+    myPlayerEast->carCount1= para_road[1].count_of_cars;
 }break;
     case 3: {
     widget_West->ChangetoRed();
+    if((para_road[3].count_of_cars-=para_road[3].prev_count_of_cars)<0)
+        para_road[3].count_of_cars=0;
+    myPlayerWest->carCount1= para_road[3].count_of_cars;
 }break;
     }
 
@@ -319,21 +350,127 @@ void MainWindow::greenTimeCalculator()
         {
             case 0: {
             widget_North->ChangetoGreen();
+            para_road[0].prev_count_of_cars=d;
             time_North->timeValue->setHMS(0,minutes_green,seconds_green);
             time_North->timer->start(1000);
         }break;
         case 2: {
         widget_South->ChangetoGreen();
+        para_road[2].prev_count_of_cars=d;
         time_South->timeValue->setHMS(0,minutes_green,seconds_green);
         time_South->timer->start(1000);
     }break;
         case 1: {
         widget_East->ChangetoGreen();
+        para_road[1].prev_count_of_cars=d;
         time_East->timeValue->setHMS(0,minutes_green,seconds_green);
         time_East->timer->start(1000);
     }break;
         case 3: {
         widget_West->ChangetoGreen();
+        para_road[3].prev_count_of_cars=d;
+        time_West->timeValue->setHMS(0,minutes_green,seconds_green);
+        time_West->timer->start(1000);
+    }break;
+        }
+}
+
+void MainWindow::greenTimeNormal()
+{
+    int i;
+    int d;
+    para_road[0].count_of_cars=myPlayerNorth->carCount1;
+    para_road[1].count_of_cars=myPlayerEast->carCount1;
+    para_road[2].count_of_cars=myPlayerSouth->carCount1;
+    para_road[3].count_of_cars=myPlayerWest->carCount1;
+    for(i=0;i<4;i++)
+    {
+        if((para_road[i].green_lit))
+            break;
+    }
+    switch(i)
+    {
+        case 0: {
+        widget_North->ChangetoRed();
+        para_road[0].green_lit= 0;
+        if((para_road[0].count_of_cars-=para_road[0].prev_count_of_cars)<0)
+            para_road[0].count_of_cars=0;
+        myPlayerNorth->carCount1= para_road[0].count_of_cars;
+    }break;
+    case 2: {
+    widget_South->ChangetoRed();
+    para_road[2].green_lit= 0;
+    if((para_road[2].count_of_cars-=para_road[2].prev_count_of_cars)<0)
+        para_road[2].count_of_cars=0;
+    myPlayerSouth->carCount1= para_road[2].count_of_cars;
+}break;
+    case 1: {
+    widget_East->ChangetoRed();
+    para_road[1].green_lit= 0;
+    if((para_road[1].count_of_cars-=para_road[1].prev_count_of_cars)<0)
+        para_road[1].count_of_cars=0;
+    myPlayerEast->carCount1= para_road[1].count_of_cars;
+}break;
+    case 3: {
+    widget_West->ChangetoRed();
+    para_road[3].green_lit= 0;
+    if((para_road[3].count_of_cars-=para_road[3].prev_count_of_cars)<0)
+        para_road[3].count_of_cars=0;
+    myPlayerWest->carCount1= para_road[3].count_of_cars;
+}break;
+    }
+
+
+        if((para_road[0].masked==1)   \
+           & (para_road[1].masked==1) \
+           & (para_road[2].masked==1) \
+           & (para_road[3].masked==1)){
+            for(i=0;i<4;i++){
+                para_road[i].masked=0;
+            }
+        }
+
+        for(i=0;i<4;i++){
+                if(!para_road[i].masked){
+                    para_road[i].green_lit = 1;
+                    para_road[i].masked    = 1;
+                    d = 30;
+                    para_road[i].wait_time=0;
+                    para_road[i].green_time=d;
+                    break;
+                }
+        }
+
+        for(i=0;i<4;i++)
+        {
+            if((para_road[i].green_lit))
+                break;
+        }
+        int minutes_green = d/60;
+        int seconds_green = d%60;
+        switch(i)
+        {
+            case 0: {
+            widget_North->ChangetoGreen();
+            para_road[0].prev_count_of_cars=d;
+            time_North->timeValue->setHMS(0,minutes_green,seconds_green);
+            time_North->timer->start(1000);
+        }break;
+        case 2: {
+        widget_South->ChangetoGreen();
+        para_road[2].prev_count_of_cars=d;
+        time_South->timeValue->setHMS(0,minutes_green,seconds_green);
+        time_South->timer->start(1000);
+    }break;
+        case 1: {
+        widget_East->ChangetoGreen();
+        para_road[1].prev_count_of_cars=d;
+        time_East->timeValue->setHMS(0,minutes_green,seconds_green);
+        time_East->timer->start(1000);
+    }break;
+        case 3: {
+        widget_West->ChangetoGreen();
+        para_road[3].prev_count_of_cars=d;
         time_West->timeValue->setHMS(0,minutes_green,seconds_green);
         time_West->timer->start(1000);
     }break;
@@ -353,3 +490,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+    this->DTMS= true;
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    this->DTMS= false;
+}

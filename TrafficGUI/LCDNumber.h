@@ -17,7 +17,7 @@ class LCDNumber: public QLCDNumber
 signals:
   void greencal_call();
   public:
-        LCDNumber(QWidget * parentWidget,int minutes=0,int seconds=10)
+        LCDNumber(QWidget * parentWidget,int minutes=0,int seconds=1)
         {
             timer = new QTimer();
             timeValue = new QTime(0,minutes,seconds);
