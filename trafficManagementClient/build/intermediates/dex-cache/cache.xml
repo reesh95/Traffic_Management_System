@@ -3,12 +3,30 @@
 
     <item
         is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/jars/classes.jar"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/libs/okhttp-3.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/2/okhttp-3.6.0_8cd3a54fb6cde7db2ea45324abfcc2fe7ce29285/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-22.0.0_7afea4fbce1c5e8866b1dbf40a51a06ee0d53f35/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
         sha1="8c6ebb7d087d1a30bf84356bd2aecf85309fc024">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.melnykov-floatingactionbutton-1.3.0_e5de32d46b3ec98a73c3d189f2a4642ce6f10d83/classes.dex" />
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.melnykov-floatingactionbutton-1.3.0_ee743f45a2590570e83df994346535213068947e/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -17,34 +35,16 @@
         optimize="true"
         revision="21.1.2"
         sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-2.4.0_c98823b54286873bbb986d1915eb06704610261b/classes.dex" />
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-2.4.0_c98823b54286873bbb986d1915eb06704610261b/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-22.0.0_5c3ade5c7311835a2451a7c2a5a8431b0245d2e6/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="85b95c39b248665f00c19078fe8a3058424acd7e">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_76a50e78371ba18f154c6f1cd45df4a3a20c2cda/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.3/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="4b8945fc23a7461c6fdde15753456d64b0a9358b">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-21.0.3_45c02866df6f9ec41a1875c5c8c043fdaff037c5/classes.dex" />
+        sha1="72994cdfaf2fa28750159d005436487111b424c0">
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_e546c8887331f2873af3acefd8405e6af553b9d9/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -53,16 +53,16 @@
         optimize="true"
         revision="21.1.2"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.0.0_b752a9fb7263b32fd5c43ee8b2838eada46fde9c/classes.dex" />
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.0.0_b752a9fb7263b32fd5c43ee8b2838eada46fde9c/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.4/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-22.0.0_f882f42311465b9528ca19ad391dae274bbd41c5/classes.dex" />
+        sha1="87405405e403de68f4057757b8a2e8de02bd65d0">
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.navasmdc-MaterialDesign-1.4_6aba0237121971e78688b9f6bdae3b54b4d9243c/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -71,52 +71,52 @@
         optimize="true"
         revision="21.1.2"
         sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.0_a863750519c71d99d7a913312446f69c778e4c59/classes.dex" />
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.0_a863750519c71d99d7a913312446f69c778e4c59/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/libs/okhttp-3.6.0.jar"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.3/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/2/okhttp-3.6.0_68ee932adea5d72fa6132e206507f3ff3ebd8619/classes.dex" />
+        sha1="4b8945fc23a7461c6fdde15753456d64b0a9358b">
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-21.0.3_a732499183d71d33d87d98e11f0d7a63cdc57f21/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.4/jars/classes.jar"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="87405405e403de68f4057757b8a2e8de02bd65d0">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.navasmdc-MaterialDesign-1.4_d6885d46fdb99e87baefe4100cb132c37b20852a/classes.dex" />
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-22.0.0_a6b8e948ae51d85ac903465a62d69cf248c14dba/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/libs/okio-1.11.0.jar"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/2/okio-1.11.0_43bc296626a3621e7d491ee7470fc7f80279714e/classes.dex" />
+        sha1="21dcfb90da43868b33b0bb7b720f03eea87d9d31">
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_cf57a8c48342b30d85591f1f27f4599def89ad59/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
         sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-22.0.0_a1b36ff024fb0cb1d38bf956b8b2f38b6621e61e/classes.dex" />
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-22.0.0_ae3d948d55ef14f8bc2c0c178f00959c234e1f24/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/libs/okio-1.11.0.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="1ce28f09e245a342dd76ebae89117a12e7996d89">
-        <dex dex="/home/tareesh/Downloads/anveshan/client app/SpeedMeter-master/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_9808ead5dc56f7ce40b0d479d14490d2df771e61/classes.dex" />
+        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
+        <dex dex="/home/tareesh/Desktop/Traffic_Management_System/trafficManagementClient/app/build/intermediates/transforms/dex/debug/folders/1000/2/okio-1.11.0_91f3c58bb69da4061f09763a8c8e6d5f4669344e/classes.dex" />
     </item>
 
 </items>
