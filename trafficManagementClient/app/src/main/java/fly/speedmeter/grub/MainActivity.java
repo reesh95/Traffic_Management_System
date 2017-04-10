@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
@@ -35,6 +36,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import android.os.StrictMode;
+
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.gc.materialdesign.widgets.Dialog;
@@ -47,9 +50,9 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity implements LocationListener, GpsStatus.Listener {
 
     private SharedPreferences  sharedPreferences;
-    private LocationManager mLocationManager;
+    public LocationManager mLocationManager;
     private static Data data;
-
+    private static Location loc;
     private Toolbar toolbar;
     private FloatingActionButton fab;
     private FloatingActionButton refresh;
@@ -63,13 +66,17 @@ public class MainActivity extends ActionBarActivity implements LocationListener,
     private TextView distance;
     private Chronometer time;
     private Data.onGpsServiceUpdate onGpsServiceUpdate;
-    private int uploadInterval;
+    private int uploadInterval=20;
     private boolean firstfix;
     long lasttime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+
 
         data = new Data(onGpsServiceUpdate);
 
@@ -108,6 +115,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener,
         time = (Chronometer) findViewById(R.id.time);
         currentSpeed = (TextView) findViewById(R.id.currentSpeed);
         progressBarCircularIndeterminate = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBarCircularIndeterminate);
+        final Send_JSON_Payload sjson;
 
         time.setText("00:00:00");
         time.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -121,33 +129,9 @@ public class MainActivity extends ActionBarActivity implements LocationListener,
                 }else{
                     time = data.getTime();
                 }
-                if (time-lasttime>uploadInterval){
-                    lasttime=time;
-                    OkHttpClient client = new OkHttpClient();
-                    Location loc=mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    double lat=loc.getLatitude();
-                    double lon=loc.getLongitude();
-                    MediaType mediaType = MediaType.parse("application/json");
-                    RequestBody body = RequestBody.create(mediaType, "{\"Average Speed \":"+String.valueOf(data.getAverageSpeed())+", \"Distance\":"+String.valueOf(data.getDistance())+", \"location\":"+String.valueOf(lat)+String.valueOf(lon)+"}\n");
-                    Request request = new Request.Builder()
-                            .url("http://52.74.108.222/Thingworx/Things/BLIP_traffic_thingv3/Services/UpdateValues?postParameter=Payload")
-                            .post(body)
-                            .addHeader("content-type", "application/json")
-                            .addHeader("appkey", "0c9070d7-9a13-4677-bd8a-f9297b8d296c")
-                            .addHeader("accept", "application/html")
-                            .addHeader("cache-control", "no-cache")
-                            .addHeader("postman-token", "12972401-1670-7d7c-afdd-01f30a23e770")
-                            .build();
-
-
-                    try {
-                        Response response = client.newCall(request).execute();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
+                Intent int1= new Intent(getBaseContext(), Send_JSON_Payload.class);
+                startService(int1);
+                stopService(int1);
                 int h   = (int)(time /3600000);
                 int m = (int)(time  - h*3600000)/60000;
                 int s= (int)(time  - h*3600000 - m*60000)/1000 ;
@@ -270,6 +254,8 @@ public class MainActivity extends ActionBarActivity implements LocationListener,
 
     @Override
     public void onLocationChanged(Location location) {
+
+        this.loc = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location.hasAccuracy()) {
             SpannableString s = new SpannableString(String.format("%.0f", location.getAccuracy()) + "m");
             s.setSpan(new RelativeSizeSpan(0.75f), s.length()-1, s.length(), 0);
@@ -379,4 +365,9 @@ public class MainActivity extends ActionBarActivity implements LocationListener,
 
     @Override
     public void onProviderDisabled(String s) {}
+
+    public static Location getloc(){
+        return loc;
+    }
+
 }
