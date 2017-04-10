@@ -79,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
                               this, SLOT(greenTimeCalculator_point()));
 
     ui->setupUi(this);
+    ui->textEdit->setText("Current running algorithm is DTMS");
     QPixmap *pix= new QPixmap("../TrafficGUI/Analog-Devices.jpg");
     QPixmap *pix1= new QPixmap("../TrafficGUI/RVCE_New_Logo.jpg");
     ui->logo->setPixmap(pix->scaled(ui->logo->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
@@ -494,9 +495,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     this->DTMS= true;
+    ui->textEdit->setText("Current running algorithm is DTMS");
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     this->DTMS= false;
+    ui->textEdit->setText("Current running algorithm is normal");
 }
