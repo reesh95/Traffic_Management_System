@@ -120,7 +120,7 @@ MainWindow::MainWindow(QWidget *parent) :
     widget_South->Start();
     widget_East->Start();
     widget_West->Start();
-    widget_North->ChangetoGreen();
+    widget_North->ChangetoRed();
     widget_South->ChangetoRed();
     widget_East->ChangetoRed();
     widget_West->ChangetoRed();
@@ -480,6 +480,10 @@ void MainWindow::greenTimeNormal()
 
 MainWindow::~MainWindow()
 {
+    delete time_East;
+    delete time_North;
+    delete time_South;
+    delete time_West;
     delete myPlayerNorth;
     delete myPlayerSouth;
     delete myPlayerEast;
