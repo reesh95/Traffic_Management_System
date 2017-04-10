@@ -76,8 +76,10 @@ MainWindow::MainWindow(QWidget *parent) :
                               this, SLOT(greenTimeCalculator()));
 
     ui->setupUi(this);
-
-
+    QPixmap *pix= new QPixmap("../TrafficGUI/Analog-Devices.jpg");
+    QPixmap *pix1= new QPixmap("../TrafficGUI/RVCE_New_Logo.jpg");
+    ui->logo->setPixmap(pix->scaled(ui->logo->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
+    ui->logo1->setPixmap(pix1->scaled(ui->logo1->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
     if (!myPlayerNorth->loadVideo("CarsDrivingUnderBridge.mp4"))
     {
         QMessageBox msgBox;
