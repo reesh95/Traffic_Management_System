@@ -1,0 +1,29 @@
+me.North_Cars_in=Payload.PeopleEntered;
+me.North_Cars_num=Payload.PeopleInRoom;
+me.North_Cars_out=Payload.PeopleLeft;
+
+me.South_Cars_in=Payload.PeopleEntered;
+me.South_Cars_num=Payload.PeopleInRoom;
+me.South_Cars_out=Payload.PeopleLeft;
+
+me.East_Cars_in= Payload.PeopleEntered;
+me.East_Cars_num= Payload.PeopleInRoom;
+me.East_Cars_out= Payload.PeopleLeft;
+
+me.West_Cars_in= Payload.PeopleEntered;
+me.West_Cars_num= Payload.PeopleInRoom;
+me.West_Cars_out= Payload.PeopleLeft;
+
+me.North_Cars_num+=me.North_Cars_in-me.North_Cars_out;
+me.South_Cars_num=10;
+me.East_Cars_num=10;
+me.West_Cars_num=10;
+
+if(me.North_Cars_num<0)
+    me.North_Cars_num=0;
+if(me.South_Cars_num<0)
+    me.South_Cars_num=0;
+if(me.East_Cars_num<0)
+    me.East_Cars_num=0;
+if(me.West_Cars_num<0)
+    me.West_Cars_num=0;
