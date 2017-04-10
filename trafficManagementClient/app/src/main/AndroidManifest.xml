@@ -4,7 +4,7 @@
     package="fly.speedmeter.grub" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,6 +33,7 @@
         </activity>
 
         <service android:name=".GpsServices"/>
+        <service android:name=".Send_JSON_Payload"/>
     </application>
 
 </manifest>

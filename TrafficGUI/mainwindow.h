@@ -24,6 +24,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void greenTimeCalculator();
+    void greenTimeNormal();
 
 private slots:
     //Display video frame in player UI
@@ -31,10 +33,15 @@ private slots:
     void updatePlayerUI1(QImage img);
     void updatePlayerUI2(QImage img);
     void updatePlayerUI3(QImage img);
-    void greenTimeCalculator();
+    void greenTimeCalculator_point();
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
+    bool DTMS;
     Player* myPlayerNorth;
     Player* myPlayerSouth;
     Player* myPlayerEast;

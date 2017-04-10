@@ -15,6 +15,14 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class GpsServices extends Service implements LocationListener, GpsStatus.Listener {
     private LocationManager mLocationManager;
 
@@ -75,7 +83,34 @@ public class GpsServices extends Service implements LocationListener, GpsStatus.
             }
             data.update();
             updateNotification(true);
+
+            OkHttpClient client = new OkHttpClient();
+            Location loc=mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double lat=loc.getLatitude();
+                double lon=loc.getLongitude();
+                float dir=loc.getBearing();
+                MediaType mediaType = MediaType.parse("application/json");
+                RequestBody body = RequestBody.create(mediaType, "{\"Average_speed \":"+data.getAverageSpeed().subSequence(0,data.getAverageSpeed().length()-4)+", \"Distance\":"+data.getDistance().subSequence(0,data.getDistance().length()-1)+", \"Location\":"+String.valueOf(lat)+","+String.valueOf(lon)+", \"Current_direction\":"+String.valueOf(dir)+"}\n");
+                Request request = new Request.Builder()
+                        .url("http://52.74.108.222/Thingworx/Things/Phoneapp_thing/Services/UpdateValues?postParameter=Payload")
+                        .post(body)
+                        .addHeader("content-type", "application/json")
+                        .addHeader("appkey", "0c9070d7-9a13-4677-bd8a-f9297b8d296c")
+                        .addHeader("accept", "application/html")
+                        .addHeader("cache-control", "no-cache")
+                        .addHeader("postman-token", "12972401-1670-7d7c-afdd-01f30a23e770")
+                        .build();
+
+
+                try {
+                    Response response = client.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
         }
+
     }
 
     public void updateNotification(boolean asData){
@@ -85,7 +120,7 @@ public class GpsServices extends Service implements LocationListener, GpsStatus.
                 .setContentIntent(contentIntent);
 
         if(asData){
-            builder.setContentText(String.format(getString(R.string.notification), data.getMaxSpeed(), data.getDistance()));
+            builder.setContentText(String.format(getString(R.string.notification), data.getAverageSpeed(), data.getDistance()));
         }else{
             builder.setContentText(String.format(getString(R.string.notification), '-', '-'));
         }

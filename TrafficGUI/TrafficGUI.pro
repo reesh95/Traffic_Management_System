@@ -41,8 +41,8 @@ FORMS    += mainwindow.ui
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/statemachine/trafficlight
 INSTALLS += target
 
-INCLUDEPATH += C:\Users\NITESH\Desktop\Anveshan\opencv\building\install\include
-LIBS += -LC:\Users\NITESH\Desktop\Anveshan\opencv\building\install\x86\mingw\lib
+INCLUDEPATH += C:\MyFolder\Nitesh\Anveshan\opencv\building\install\include
+LIBS += -LC:\MyFolder\Nitesh\Anveshan\opencv\building\install\x86\mingw\lib
 LIBS += -llibopencv_calib3d320
 LIBS += -llibopencv_core320
 LIBS += -llibopencv_features2d320
